@@ -1,6 +1,14 @@
+from pathlib import Path
 from tkinter import *
 from tkinter import messagebox as msg
 import random
+
+#附加檔案路徑
+OUTPUT_PATH = Path(__file__).parent
+ASSETS_PATH = OUTPUT_PATH / Path("./assets")
+
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
 
 def reset():
     if num1 == "":
@@ -11,19 +19,22 @@ def reset():
         allSet = set()
         for i in range(1,num1 + 1):
             allSet.add(i)
-        print(num1)#TEST
-        print(allSet)#TEST
+        #TEST
+        print(num1)
+        print(allSet)
 
 def takeNum():
-    for item in RendOutPut:
+    for item in RandOutPut:
         allSet.remove(item)
-    print(list(allSet))#TEST
-    print("---------------")#TEST
+    #TEST
+    print(list(allSet))
+    print("---------------")
 
 
 def debug_dontake():
-    print(list(allSet))#TEST
-    print("---------------")#TEST
+    #TEST
+    print(list(allSet))
+    print("---------------")
 
 #結果視窗
 
@@ -50,12 +61,12 @@ def openNewWindow():
 
     canvas.create_text(
         476.5, 278.5,
-        text = RendOutPut,
+        text = RandOutPut,
         width = 900,
         fill = "#000000",
         font = ("Arial", int(30.0)))
 
-    img0 = PhotoImage(file = f"result_img0.png")
+    img0 = PhotoImage(file=relative_to_assets("result_img0.png"))
     result_b0 = Button(
         image = img0,
         borderwidth = 0,
@@ -69,7 +80,7 @@ def openNewWindow():
         width = 189,
         height = 54)
 
-    img1 = PhotoImage(file = f"result_img1.png")
+    img1 = PhotoImage(file=relative_to_assets("result_img1.png"))
     result_b1 = Button(
         image = img1,
         borderwidth = 0,
@@ -122,7 +133,8 @@ def LeftWindow():
         fill = "#fafffd",
         font = ("Arial", int(36.0)))
 
-    img0 = PhotoImage(file = f"close.png")
+    img0 = PhotoImage(
+        file=relative_to_assets("close.png"))
     b0 = Button(
         image = img0,
         borderwidth = 0,
@@ -153,13 +165,11 @@ def mainWindow():
                 msg.showerror("輸入錯誤", "抽取人數無法大於班級人數!")
             elif NeedInt == 0:
                 msg.showerror("輸入錯誤", "請至少抽取1個人!")
-            elif NeedInt == StudentsInt:
-                msg.showerror("輸入錯誤", "請不要把全班都抽出來!")
             else:
                 global num0
                 global num1
                 global allSet
-                global RendOutPut
+                global RandOutPut
                 if num1 == "":
                     num1 = StudentsInt
                     #生成
@@ -181,8 +191,8 @@ def mainWindow():
                 elif NeedInt > len(allSet):
                     msg.showerror("輸入錯誤", f"目前籤筒內只剩下{len(allSet)}個人")
                 else:
-                    RendOutPut = random.sample(allSet,NeedInt)
-                    for item in RendOutPut:
+                    RandOutPut = random.sample(allSet,NeedInt)
+                    for item in RandOutPut:
                         print(item,end="  ") #TEST
 
                     window.destroy()
@@ -217,7 +227,8 @@ def mainWindow():
         fill = "#fafffd",
         font = ("Arial", int(18.0)))
 
-    entry0_img = PhotoImage(file = f"img_textBox0.png")
+    entry0_img = PhotoImage(
+        file = relative_to_assets("img_textBox0.png"))
     entry0_bg = canvas.create_image(
         287.5, 283.5,
         image = entry0_img)
@@ -233,7 +244,8 @@ def mainWindow():
         width = 337.0,
         height = 39)
 
-    entry1_img = PhotoImage(file = f"img_textBox1.png")
+    entry1_img = PhotoImage(
+        file = relative_to_assets("img_textBox1.png"))
     entry1_bg = canvas.create_image(
         288.0, 408.5,
         image = entry1_img)
@@ -253,7 +265,8 @@ def mainWindow():
         fill = "#fafffd",
         font = ("Arial", int(17.0)))
 
-    img0 = PhotoImage(file = f"img0.png")
+    img0 = PhotoImage(
+        file = relative_to_assets("img0.png"))
     b0 = Button(
         image = img0,
         borderwidth = 0,
@@ -266,7 +279,8 @@ def mainWindow():
         width = 160,
         height = 50)
 
-    img1 = PhotoImage(file = f"img1.png")
+    img1 = PhotoImage(
+        file = relative_to_assets("img1.png"))
     b1 = Button(
         image = img1,
         borderwidth = 0,
@@ -279,7 +293,8 @@ def mainWindow():
         width = 150,
         height = 40)
 
-    img2 = PhotoImage(file = f"img2.png")
+    img2 = PhotoImage(
+        file = relative_to_assets("img2.png"))
     b2 = Button(
         image = img2,
         borderwidth = 0,
@@ -299,8 +314,8 @@ def mainWindow():
         font = ("Arial", int(17.0)))
 
     canvas.create_text(
-        140.0, 703.0,
-        text = "Made by 訊一2 35謝邵丞",
+        135.0, 703.0,
+        text = "Made by 訊一2 謝邵丞",
         fill = "#ffffff",
         font = ("Arial", int(17.0)))
 
