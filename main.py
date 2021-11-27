@@ -63,22 +63,13 @@ def openNewWindow():
         text = "抽籤結果",
         fill = "#515486",
         font = ("Arial", int(70.0)))
-    global StudentsInt
 
-    if StudentsInt > 80:
-        canvas.create_text(
-            485.5, 290.5,
-            text = RandOutPut,
-            width = 900,
-            fill = "#000000",
-            font = ("Arial", int(30.0)))
-    else:
-        canvas.create_text(
-            476.5, 278.5,
-            text = RandOutPut,
-            width = 900,
-            fill = "#000000",
-            font = ("Arial", int(30.0)))
+    canvas.create_text(
+        476.5, 285.5,
+        text = RandOutPut,
+        width = 900,
+        fill = "#000000",
+        font = ("Arial", int(30.0)))
 
     img0 = PhotoImage(file=relative_to_assets("result_img0.png"))
     result_b0 = Button(
@@ -146,7 +137,7 @@ def LeftWindow():
         text = ShowLeft,
         width = 900,
         fill = "#fafffd",
-        font = ("Arial", int(36.0)))
+        font = ("Arial", int(30.0)))
 
     img0 = PhotoImage(
         file=relative_to_assets("close.png"))
