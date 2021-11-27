@@ -14,14 +14,18 @@ def reset():
     if num1 == "":
         msg.showerror("系統錯誤", "無法重製籤筒!")
     else:
-        msg.showinfo("系統訊息", "已重置籤筒!")
-        global allSet
-        allSet = set()
-        for i in range(1,num1 + 1):
-            allSet.add(i)
-        #TEST
-        print(num1)
-        print(allSet)
+        MsgBox = msg.askquestion('系統訊息','確定要重置籤筒嗎?')
+        if MsgBox == 'yes':
+            msg.showinfo("系統訊息", "已重置籤筒!")
+            global allSet
+            allSet = set()
+            for i in range(1,num1 + 1):
+                allSet.add(i)
+            #TEST
+            print(num1)
+            print(allSet)
+        else:
+            pass
 
 def takeNum():
     for item in RandOutPut:
@@ -42,6 +46,7 @@ def openNewWindow():
     NewWindow = Tk()
     NewWindow.title("抽籤結果")
     NewWindow.geometry("972x546")
+    NewWindow.geometry('+0+0')
     NewWindow.configure(bg = "#ffffff")
     canvas = Canvas(
         NewWindow,
@@ -58,13 +63,22 @@ def openNewWindow():
         text = "抽籤結果",
         fill = "#515486",
         font = ("Arial", int(70.0)))
+    global StudentsInt
 
-    canvas.create_text(
-        476.5, 278.5,
-        text = RandOutPut,
-        width = 900,
-        fill = "#000000",
-        font = ("Arial", int(30.0)))
+    if StudentsInt > 80:
+        canvas.create_text(
+            485.5, 290.5,
+            text = RandOutPut,
+            width = 900,
+            fill = "#000000",
+            font = ("Arial", int(30.0)))
+    else:
+        canvas.create_text(
+            476.5, 278.5,
+            text = RandOutPut,
+            width = 900,
+            fill = "#000000",
+            font = ("Arial", int(30.0)))
 
     img0 = PhotoImage(file=relative_to_assets("result_img0.png"))
     result_b0 = Button(
@@ -109,6 +123,7 @@ def LeftWindow():
         ShowLeft = ShowLeft.replace("}","")
     LeftWindow = Tk()
     LeftWindow.geometry("1000x600")
+    LeftWindow.geometry('+0+0')
     LeftWindow.configure(bg = "#344966")
     canvas = Canvas(
         LeftWindow,
@@ -156,12 +171,15 @@ def LeftWindow():
 def mainWindow():
 
     def GenerateNum():
+        global StudentsInt
         Students = entry0.get()
         need = entry1.get()
         try:
             StudentsInt = int(Students)
             NeedInt = int(need)
-            if NeedInt > StudentsInt:
+            if StudentsInt > 100:
+                msg.showerror("輸入錯誤", "無法抽取大於100人!")
+            elif NeedInt > StudentsInt:
                 msg.showerror("輸入錯誤", "抽取人數無法大於班級人數!")
             elif NeedInt == 0:
                 msg.showerror("輸入錯誤", "請至少抽取1個人!")
@@ -204,6 +222,7 @@ def mainWindow():
     window = Tk()
     window.title("班級抽籤系統")
     window.geometry("577x730")
+    window.geometry('+0+0')
     window.configure(bg = "#3c91e6")
     canvas = Canvas(
         window,
@@ -232,9 +251,11 @@ def mainWindow():
     entry0_bg = canvas.create_image(
         287.5, 283.5,
         image = entry0_img)
+
     entry0 = Entry(
         bd = 0,
         bg = "#fafffd",
+        font= ('Arial 18'),
         highlightthickness = 0)
     global num1
     entry0.insert(END, num1)
@@ -252,6 +273,7 @@ def mainWindow():
     entry1 = Entry(
         bd = 0,
         bg = "#fafffd",
+        font= ('Arial 18'),
         highlightthickness = 0)
 
     entry1.place(
@@ -315,7 +337,7 @@ def mainWindow():
 
     canvas.create_text(
         135.0, 703.0,
-        text = "Made by 訊一2 謝邵丞",
+        text = "Made by 訊一2 35謝邵丞",
         fill = "#ffffff",
         font = ("Arial", int(17.0)))
 
