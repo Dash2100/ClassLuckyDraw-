@@ -326,12 +326,6 @@ def mainWindow():
         fill = "#fafffd",
         font = ("Arial", int(17.0)))
 
-    canvas.create_text(
-        135.0, 703.0,
-        text = "Made by 訊一2 35謝邵丞",
-        fill = "#ffffff",
-        font = ("Arial", int(17.0)))
-
     window.resizable(False, False)
     window.mainloop()
 
